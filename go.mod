@@ -5,6 +5,7 @@ go 1.25.5
 require (
 	entgo.io/ent v0.14.5
 	github.com/charmbracelet/log v0.4.2
+	github.com/goccy/go-yaml v1.19.1
 	github.com/lib/pq v1.10.9
 )
 

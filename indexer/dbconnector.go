@@ -2,6 +2,7 @@ package indexer
 
 import (
 	"context"
+	"github.com/d4t4l0r3/partial-mirror/config"
 	"github.com/d4t4l0r3/partial-mirror/ent"
 	"github.com/charmbracelet/log"
 	
@@ -12,17 +13,21 @@ type DbConnector struct {
 	client *ent.Client
 }
 
-func NewDbConnector(modifiers ...DbConnectorModifier) (DbConnector, error) {
-	return newDbConnectorInternal(modifiers)
+func NewDbConnector(modifiers ...config.DbConnectorModifier) (DbConnector, error) {
+	return NewDbConnectorWithModifiers(modifiers)
 }
 
-func newDbConnectorInternal(modifiers []DbConnectorModifier) (connector DbConnector, err error) {
-	config := NewDbConnectorConfig()
+func NewDbConnectorWithModifiers(modifiers []config.DbConnectorModifier) (DbConnector, error) {
+	conf := config.NewDbConnectorConfig()
 	for _, modifier := range modifiers {
-		modifier(&config)
+		modifier(&conf)
 	}
-	log.Debug("Opening connection to DB", "host", config.Host, "port", config.Port, "user", config.User, "dbname", config.Database, "password", config.Password, "sslmode", config.SSLMode)
-	connector.client, err = ent.Open("postgres", config.ConnectionString())
+	return NewDbConnectorWithConfig(conf)
+}
+
+func NewDbConnectorWithConfig(conf config.DbConnectorConfig) (connector DbConnector, err error) {
+	log.Debug("Opening connection to DB", "host", conf.Host, "port", conf.Port, "user", conf.User, "dbname", conf.Database, "password", conf.Password, "sslmode", conf.SSLMode)
+	connector.client, err = ent.Open("postgres", conf.ConnectionString())
 	if err == nil {
 		err = connector.client.Schema.Create(context.Background())
 	}

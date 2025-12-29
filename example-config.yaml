@@ -1,0 +1,15 @@
+bind_address: localhost
+bind_port: 80
+upstreams:
+  - https://example.com
+packages:
+  - linux-lts
+retention_count: 2
+retention_time: 0
+db:
+  host: localhost
+  port: 5432
+  user: mirror
+  dbname: mirror
+  password: dont-use-in-production
+  sslmode: disable

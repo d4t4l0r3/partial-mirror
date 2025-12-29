@@ -1,14 +1,14 @@
-package indexer
+package config
 
 import "fmt"
 
 type DbConnectorConfig struct {
-	Host string
-	Port int
-	User string
-	Database string
-	Password string
-	SSLMode string
+	Host string `yaml:"host"`
+	Port int `yaml:"port"`
+	User string `yaml:"user"`
+	Database string `yaml:"dbname"`
+	Password string `yaml:"password"`
+	SSLMode string `yaml:"sslmode"`
 }
 
 func NewDbConnectorConfig() DbConnectorConfig {
