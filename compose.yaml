@@ -1,0 +1,16 @@
+services:
+  db:
+    image: postgres:18-alpine
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    shm_size: 128mb
+    environment:
+      POSTGRES_USER: mirror
+      POSTGRES_DB: mirror
+      POSTGRES_PASSWORD: dont-use-in-production
+    volumes:
+      - pgdata:/var/lib/postgresql:rw
+
+volumes:
+  pgdata:
