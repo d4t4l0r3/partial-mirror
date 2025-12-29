@@ -1,11 +1,9 @@
 # partial-mirror
 
 This software is aimed at hosting partial mirrors for any linux distro (and potentially any other system using similar HTTP(S) repositories).
-The server acts as a regular mirror, but only syncs a selected list of packages rather than the entire repository, to preserve bandwidth and storage space.
+The server acts as a regular mirror, but only syncs a selected list of packages rather than the entire repository, to preserve bandwidth and storage space. All other packages will only be synced on demand, but then stay cached alongside the pre-fetched packages in accordance with the configured retention policy.
 
 ## Configuration
-
-Configuration
 
 | YAML name         | Env variable name                | Default   | Description                                                              |
 | ---               | ---                              | ---       | ---                                                                      |
