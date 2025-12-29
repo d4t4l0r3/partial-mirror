@@ -21,7 +21,3 @@ Configuration
 | `db.dbname`       | `PARTIAL_MIRROR_DB_DBNAME`       | mirror    | The name of the database                                                 |
 | `db.password`     | `PARTIAL_MIRROR_DB_PASSWORD`     | _empty_   | The password for the database user                                       |
 | `db.sslmode`      | `PARTIAL_MIRROR_DB_SSLMODE`      | require   | Postgres' [sslmode setting](https://www.postgresql.org/docs/current/libpq-connect.html) |
-
-- the upstream mirror to sync from (and fallbacks)
-- the list of packages to keep synced
-- package retention (how many past versions to keep & how long to keep them)
