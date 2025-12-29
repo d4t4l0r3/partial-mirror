@@ -14,6 +14,6 @@ func must[T any](obj T, err error) T {
 
 func main() {
 	log.SetLevel(log.DebugLevel)
-	indexer := must(indexer.NewIndexer(indexer.WithSSLMode(false)))
+	indexer := must(indexer.NewIndexer(indexer.WithSSLMode("disable")))
 	indexer.Close()
 }

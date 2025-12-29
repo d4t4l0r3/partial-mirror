@@ -8,23 +8,15 @@ type DbConnectorConfig struct {
 	User string
 	Database string
 	Password string
-	SSLMode bool
+	SSLMode string
 }
 
 func NewDbConnectorConfig() DbConnectorConfig {
-	return DbConnectorConfig{"localhost", 5432, "mirror", "mirror", "dont-use-in-production", true}
+	return DbConnectorConfig{"localhost", 5432, "mirror", "mirror", "dont-use-in-production", "require"}
 }
 
 func (config DbConnectorConfig) ConnectionString() string {
-	return fmt.Sprintf("host=%v port=%v user=%v dbname=%v password=%v sslmode=%v", config.Host, config.Port, config.User, config.Database, config.Password, config.SSLModeString())
-}
-
-func (config DbConnectorConfig) SSLModeString() string {
-	if config.SSLMode {
-		return "require"
-	} else {
-		return "disable"
-	}
+	return fmt.Sprintf("host=%v port=%v user=%v dbname=%v password=%v sslmode=%v", config.Host, config.Port, config.User, config.Database, config.Password, config.SSLMode)
 }
 
 type DbConnectorModifier func(*DbConnectorConfig)
@@ -59,7 +51,7 @@ func WithPassword(password string) DbConnectorModifier {
 	}
 }
 
-func WithSSLMode(sslmode bool) DbConnectorModifier {
+func WithSSLMode(sslmode string) DbConnectorModifier {
 	return func(config *DbConnectorConfig) {
 		config.SSLMode = sslmode
 	}

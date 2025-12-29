@@ -21,7 +21,7 @@ func newDbConnectorInternal(modifiers []DbConnectorModifier) (connector DbConnec
 	for _, modifier := range modifiers {
 		modifier(&config)
 	}
-	log.Debug("Opening connection to DB", "host", config.Host, "port", config.Port, "user", config.User, "dbname", config.Database, "password", config.Password, "sslmode", config.SSLModeString())
+	log.Debug("Opening connection to DB", "host", config.Host, "port", config.Port, "user", config.User, "dbname", config.Database, "password", config.Password, "sslmode", config.SSLMode)
 	connector.client, err = ent.Open("postgres", config.ConnectionString())
 	if err == nil {
 		err = connector.client.Schema.Create(context.Background())
